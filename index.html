@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App - By Sourish Sharma</title>
+    <!-- <link rel="stylesheet" href="font/Rimouski.css"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+*{
+    font-family: 'Roboto Slab', serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: radial-gradient(grey,whitesmoke);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align:center;
+    align-items: center;
+    justify-content: space-around
+    
+    
+}
+.main{
+    margin: auto;
+    width: 100%;
+    border: 3px solid green;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+   
+.app-title{
+    width: 300px;
+    height: 50px;
+    border-radius: 10px 10px 0 0;
+}
+
+.app-title p{
+    text-align: center;
+    padding: 15px;
+    margin: 0 auto;
+    font-size: 30px;
+    color: #293251;
+}
+
+
+
+
+.notification{
+    background-color: #f8d7da;
+    display: none;
+}
+
+.notification p{
+    color: #721c24;
+    font-size: 1.2em;
+    margin: 0;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+.weather-icon{
+    width: 300px;
+    height: 128px;
+}
+
+.weather-icon img{
+    display: block;
+    margin: 0 auto;
+}
+
+.temperature-value{
+    width: 300px;
+    height:60px;
+}
+
+.temperature-value p{
+    padding: 0;
+    margin: 0;
+    color: #293251;
+    font-size: 4em;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.temperature-value p:hover{
+    transition: 0.5s ease-in-out;
+    font-size: 80px;
+    color:rgb(15, 94, 126);
+}
+
+.temperature-value span{
+    color: #293251;
+    font-size: 0.5em;
+}
+
+.temperature-description{
+    
+}
+
+.temperature-description p{
+    padding: 8px;
+    margin: 0;
+    color: #293251;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.location{
+    
+}
+
+.location p{
+    margin: 0;
+    padding: 0;
+    color: #293251;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+
+.credit{
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    border: 5px solid rgb(0, 0, 0);
+    background-color: #D6ED17FF;
+    transition: 1s;
+}
+
+.credit:hover{
+    transition: 0.5s ease-in-out;
+    font-size: 30px;
+    border: 5px solid #D6ED17FF;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgb(17, 17, 17); /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 80px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+    font-size: 30px;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 40px;}
+    .sidenav a {font-size: 45px;}
+  }
+  
+    </style>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="app-title">
+                <p>Todays Weather</p>
+            </div>
+            <div class="notification"> </div>
+            <div class="weather-container">
+                <div class="weather-icon">
+                    <img src="icons/unknown.png" alt="There is some problem in displaying the picture">
+                </div>
+                <div class="temperature-value">
+                    <p>- °<span>C</span></p>
+                </div>
+                <div class="temperature-description">
+                    <p> - </p>
+                </div>
+                <div class="location">
+                    <p>-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About Me</a>
+        <a href="#">Services</a>
+        <a href="#">More Projects</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=sourishsharmadev@gmail.com" target="_blank">Contact Me</a>
+      </div>
+      
+      <!-- Use any element to open the sidenav -->
+      <span onclick="openNav()" class="credit">By <b><span>Sourish Sharma</span></b></span>
+
+    
+    <script>
+        const iconElement = document.querySelector(".weather-icon");
+        const tempElement = document.querySelector(".temperature-value p");
+        const descElement = document.querySelector(".temperature-description p");
+        const locationElement = document.querySelector(".location p");
+        const notificationElement = document.querySelector(".notification");
+        
+        // App data
+        const weather = {};
+        
+        weather.temperature = {
+            unit : "celsius"
+        }
+        
+        // APP CONSTS AND VARS
+        const KELVIN = 273;
+        // API KEY
+        const key = "0f8b12c83409212e0212f22ab1b4f644";
+        
+        // CHECK IF BROWSER SUPPORTS GEOLOCATION
+        if('geolocation' in navigator){
+            navigator.geolocation.getCurrentPosition(setPosition, showError);
+        }else{
+            notificationElement.style.display = "block";
+            notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";
+        }
+        
+        // SET USER'S POSITION
+        function setPosition(position){
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            
+            getWeather(latitude, longitude);
+        }
+        
+        // SHOW ERROR WHEN THERE IS AN ISSUE WITH GEOLOCATION SERVICE
+        function showError(error){
+            notificationElement.style.display = "block";
+            notificationElement.innerHTML = `<p> ${error.message} </p>`;
+        }
+        
+        // GET WEATHER FROM API PROVIDER
+        function getWeather(latitude, longitude){
+            let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+            
+            fetch(api)
+                .then(function(response){
+                    let data = response.json();
+                    return data;
+                })
+                .then(function(data){
+                    weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+                    weather.description = data.weather[0].description;
+                    weather.iconId = data.weather[0].icon;
+                    weather.city = data.name;
+                    weather.country = data.sys.country;
+                })
+                .then(function(){
+                    displayWeather();
+                });
+        }
+        
+        // DISPLAY WEATHER TO UI
+        function displayWeather(){
+            iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
+            tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+            descElement.innerHTML = weather.description;
+            locationElement.innerHTML = `${weather.city}, ${weather.country}`;
+        }
+        
+        // C to F conversion
+        function celsiusToFahrenheit(temperature){
+            return (temperature * 9/5) + 32;
+        }
+        
+        // WHEN THE USER CLICKS ON THE TEMPERATURE ELEMENET
+        tempElement.addEventListener("click", function(){
+            if(weather.temperature.value === undefined) return;
+            
+            if(weather.temperature.unit == "celsius"){
+                let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
+                fahrenheit = Math.floor(fahrenheit);
+                
+                tempElement.innerHTML = `${fahrenheit}°<span>F</span>`;
+                weather.temperature.unit = "fahrenheit";
+            }else{
+                tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+                weather.temperature.unit = "celsius"
+            }
+        });
+        
+        // function openNav() {
+        //     document.getElementById("mySidenav").style.width = "250px";
+        //     document.getElementById("main").style.marginLeft = "250px";
+        //     document.body.style.backgroundColor = "rgba(0,0,0,1)";
+        //   }
+          
+        //   /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+        //   function closeNav() {
+        //     document.getElementById("mySidenav").style.width = "0";
+        //     document.getElementById("main").style.marginLeft = "0";
+        //     document.body.style.backgroundColor = "white";
+        //   }
+        
+        
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+          }
+          
+          /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+          }
+        </script>
+</body>
+</html>
+
+
